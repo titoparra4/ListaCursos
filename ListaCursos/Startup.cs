@@ -26,6 +26,12 @@ namespace ListaCursos
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddHttpClient("coursesServices", c =>
+            {
+                c.BaseAddress = new Uri(Configuration["CoursesService"]);
+            });
+
             services.AddSingleton<ICoursesProvider, FakeCoursesProvider>();
 
             services.Configure<CookiePolicyOptions>(options =>
