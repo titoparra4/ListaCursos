@@ -46,5 +46,10 @@ namespace ListaCursos.Provider
         {
             return Task.FromResult(repo.FirstOrDefault(c => c.Id == id));
         }
+
+        public Task<ICollection<Course>> SearchAsync(string search)
+        {
+            return Task.FromResult((ICollection<Course>)repo.Where(c => c.Name.ToLowerInvariant().Contains(search.ToLowerInvariant())).ToList());
+        }
     }
 }
